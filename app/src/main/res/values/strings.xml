@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MangaMoose</string>
+    <string name="onboarding_text">Find the manga you \nlike the most</string>
+    <string name="onboarding_desc">It\'s now easier than ever to search for popular manga worldwide. Just open the MangaMoose app, and you\'re ready to read the manga.</string>
 </resources>

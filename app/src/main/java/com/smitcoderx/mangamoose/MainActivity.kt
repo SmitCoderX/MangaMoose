@@ -3,27 +3,39 @@ package com.smitcoderx.mangamoose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.SystemUiController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.smitcoderx.mangamoose.ui.home.HomeScreen
+import com.smitcoderx.mangamoose.ui.onboard.OnBoardingScreen
 import com.smitcoderx.mangamoose.ui.theme.MangaMooseTheme
-import timber.log.Timber
+import com.smitcoderx.mangamoose.ui.theme.OnBoardBgColor
+import com.smitcoderx.mangamoose.utils.Constants.MAIN_SCREEN
+import com.smitcoderx.mangamoose.utils.Constants.ON_BOARD
 
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MangaMooseTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                val navController = rememberNavController()
+                val systemUiController: SystemUiController = rememberSystemUiController()
+                systemUiController.setStatusBarColor(OnBoardBgColor)
+                NavHost(
+                    navController = navController,
+                    startDestination = ON_BOARD
                 ) {
-                   Timber.d("Hello From MainScreen")
+                    composable(ON_BOARD) {
+                        OnBoardingScreen(navController = navController)
+                    }
+                    composable(MAIN_SCREEN) {
+                        HomeScreen()
+                    }
                 }
             }
         }
